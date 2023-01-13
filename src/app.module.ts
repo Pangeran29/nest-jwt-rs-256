@@ -3,8 +3,11 @@ import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import * as fs from 'fs';
+import { JwtStrategy } from './guards/jwt.strategy';
+import { JwtGuard } from './guards/jwt.guard';
+import { RolesGuard } from './guards/roles.guard';
 
-const privateKey  = fs.readFileSync('private.pem');
+export const privateKey  = fs.readFileSync('private.pem');
 const publicKey  = fs.readFileSync('public.pem');
 
 @Module({
@@ -22,9 +25,9 @@ const publicKey  = fs.readFileSync('public.pem');
         };
         return options;
       }
-    }),
+    })
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtGuard, JwtStrategy, RolesGuard],
 })
 export class AppModule {}
