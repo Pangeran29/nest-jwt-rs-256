@@ -31,3 +31,11 @@ use:
 ```
 JwtGuard implements strategy from JwtStrategy 
 don't forget to register your guard as providers in module
+
+## RBAC (Roles Based Access Control) 
+use: 
+```
+@Roles(ROLES.ADMIN)
+@UseGuards(JwtGuard, RolesGuard)
+```
+implement access control user in API

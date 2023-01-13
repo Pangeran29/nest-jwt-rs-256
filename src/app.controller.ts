@@ -1,7 +1,9 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Roles, ROLES } from './decorators/roles.decorator';
 import { JwtGuard } from './guards/jwt.guard';
 import { JwtStrategy } from './guards/jwt.strategy';
+import { RolesGuard } from './guards/roles.guard';
 
 @Controller()
 export class AppController {
@@ -12,8 +14,8 @@ export class AppController {
     return this.appService.testJwt()
   }
 
-
-  @UseGuards(JwtGuard)
+  @Roles(ROLES.ADMIN)
+  @UseGuards(JwtGuard, RolesGuard)
   @Get('users')
   async getAllUser(): Promise<any> {
     const user = [

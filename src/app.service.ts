@@ -9,7 +9,7 @@ export class AppService {
 
   async testJwt(): Promise<{ token: string }> {
     const token = await this.jwtService.signAsync({
-      data: { email: 'java', role: '1' }
+      data: { email: 'java', role: '2' }
     });
 
     return { token };
